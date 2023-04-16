@@ -16,8 +16,9 @@ def get_song_list_from_spotify(playlist_uri):
     songs = []
 
     for track in tracks:
-        track = track["track"]
-        songs.append(track["uri"])
+        uri = track["track"]["uri"]
+        if not spotify.current_user_saved_tracks_contains(tracks=[uri])[0]:
+            songs.append(uri)
     return songs
 
 
